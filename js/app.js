@@ -5,17 +5,15 @@
     jdg:   { name: 'JDG', net: '699,00', vat: '160,77', gross: '859,77' },
     spzoo: { name: 'Spółka z o.o.', net: '1 499,00', vat: '344,77', gross: '1 843,77' }
   };
-  var state = { pkg: 'jdg', pay: 'blik', accept: false, bf: false };
+  var state = { pkg: 'jdg', pay: 'blik', accept: false };
   var BASE = { jdg: 69900, spzoo: 149900 };
   function zl(c) { var n = Math.round(c) / 100; return n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'); }
   function calc(k) {
-    var net = BASE[k], disc = state.bf ? Math.round(net * 0.2) : 0, n = net - disc, vat = Math.round(n * 0.23);
-    return { orig: net, disc: disc, net: n, vat: vat, gross: n + vat };
+    var net = BASE[k], vat = Math.round(net * 0.23);
+    return { net: net, vat: vat, gross: net + vat };
   }
   function priceHtml(k, short) {
-    var c = calc(k), o = zl(BASE[k]).replace(',00', '');
-    if (!state.bf) return o + ' zł' + (short ? '' : ' <small>netto</small>');
-    return '<s style="opacity:.55;font-weight:500">' + o + ' zł</s> ' + zl(c.net) + ' zł' + (short ? '' : ' <small>netto</small>');
+    return zl(BASE[k]).replace(',00', '') + ' zł' + (short ? '' : ' <small>netto</small>');
   }
 
   function setText(sel, txt) { $$(sel).forEach(function (e) { e.textContent = txt; }); }
@@ -25,8 +23,6 @@
     $('#pay-later').hidden = state.pkg !== 'jdg';
     var p = P[state.pkg], c = calc(state.pkg);
     p = { name: p.name, net: zl(c.net), vat: zl(c.vat), gross: zl(c.gross) };
-    $('#bf-row').hidden = !state.bf;
-    setText('#v-disc', zl(c.disc));
     ['jdg', 'spzoo'].forEach(function (k) {
       var b = $('.pkg[data-pkg="' + k + '"]'), g = calc(k);
       b.querySelector('.price').innerHTML = priceHtml(k, false);
@@ -138,50 +134,6 @@
   });
   $('#z-nip').addEventListener('input', function () {
     $('#nip-msg').hidden = true;
-  });
-
-  /* Black Friday: okno po 10 s, przycisk po dłuższym czytaniu końca strony, raz */
-  var closed = false, timer = null, dwell = null;
-  try { if (window.localStorage.getItem('bf26') === '1') closed = true; } catch (e) {}
-  function bfClose() {
-    closed = true;
-    clearTimeout(timer); clearTimeout(dwell);
-    try { window.localStorage.setItem('bf26', '1'); } catch (e) {}
-    $('#bf-popup').hidden = true;
-    $('#bf-pill').hidden = true;
-  }
-  $$('[data-bf-close]').forEach(function (e) { e.addEventListener('click', bfClose); });
-  $$('.bf-go, .bf-pill a').forEach(function (e) {
-    e.addEventListener('click', function () { state.bf = true; render(); });
-  });
-  if (!closed) {
-    timer = setTimeout(function () {
-      if (closed) return;
-      var showBf = function () {
-        if (closed) return;
-        var a = document.activeElement;
-        if (a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA')) { timer = setTimeout(showBf, 15000); return; }
-        $('#bf-pill').hidden = true; $('#bf-popup').hidden = false;
-        var cb = $('#bf-popup [data-bf-close]'); if (cb) cb.focus();
-      };
-      showBf();
-    }, 10000);
-    window.addEventListener('scroll', function () {
-      if (closed) return;
-      var el = document.documentElement;
-      var nearEnd = (window.innerHeight + (window.scrollY || el.scrollTop)) >= (el.scrollHeight - 260);
-      if (nearEnd) {
-        if (!dwell) {
-          dwell = setTimeout(function () {
-            dwell = null;
-            if (!closed && $('#bf-popup').hidden) $('#bf-pill').hidden = false;
-          }, 8000);
-        }
-      } else if (dwell) { clearTimeout(dwell); dwell = null; }
-    }, { passive: true });
-  }
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !$('#bf-popup').hidden) bfClose();
   });
 
   /* Film: autoplay bez dźwięku, pauza dostępna; bez autoodtwarzania przy ograniczonym ruchu */

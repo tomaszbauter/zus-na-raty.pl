@@ -172,23 +172,6 @@ footer{background:#fff;color:#6B7A8C;font-size:13px;line-height:20px;padding:32p
 .ft-note{margin:0;font-size:12px;line-height:18px;color:#5F6F80}
 @media (max-width:700px){.ft{grid-template-columns:1fr;gap:28px}}
 
-/* BLACK FRIDAY */
-.bf-back{position:fixed;inset:0;z-index:1000;background:rgba(4,10,20,.78);display:flex;align-items:center;justify-content:center;padding:20px}
-.bf-box{position:relative;width:100%;max-width:560px;max-height:100%;overflow:auto;background:#070F1C;border:1px solid #2A3B55;border-radius:28px;padding:48px 40px 36px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.6)}
-.bf-x{position:absolute;right:16px;top:16px;width:44px;height:44px;border-radius:999px;border:1px solid #2A3B55;background:#0F1D31;color:#fff;font-size:24px;line-height:1}
-.bf-tag{display:inline-block;background:#FFC83D;color:#070F1C;font-size:14px;line-height:20px;font-weight:800;letter-spacing:2px;padding:6px 16px;border-radius:999px}
-.bf-big{font-size:132px;line-height:124px;font-weight:800;letter-spacing:-6px;color:#FFC83D;margin:24px 0 8px}
-.bf-t{font-size:30px;line-height:36px;font-weight:800;letter-spacing:-.6px;color:#fff}
-.bf-s{font-size:20px;line-height:28px;color:#7FD6FF;font-weight:700;margin-top:6px}
-.bf-go{display:block;margin-top:32px;background:#FFC83D;color:#070F1C;text-decoration:none;font-weight:800;font-size:20px;line-height:26px;padding:20px 24px;border-radius:16px}
-.bf-no{margin-top:16px;background:transparent;border:0;color:#9FB3CC;font-size:16px;line-height:24px;text-decoration:underline;padding:8px}
-.bf-fine{font-size:12px;line-height:18px;color:#8498B3;margin-top:12px}
-.bf-pill{position:fixed;left:0;right:0;bottom:20px;z-index:900;display:flex;justify-content:center;padding:0 16px;pointer-events:none}
-.bf-pill>div{pointer-events:auto;display:flex;align-items:center;gap:6px;background:#070F1C;border:2px solid #FFC83D;border-radius:999px;padding:8px 8px 8px 24px;box-shadow:0 16px 48px rgba(0,0,0,.45);max-width:100%}
-.bf-pill a{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:center;text-decoration:none;color:#fff;font-size:17px;line-height:24px;font-weight:700}
-.bf-pill a b{color:#FFC83D;font-weight:800;letter-spacing:1.2px}
-.bf-pill button{flex:none;width:40px;height:40px;border-radius:999px;border:0;background:#1A2A42;color:#fff;font-size:22px;line-height:1}
-
 /* RESPONSYWNOŚĆ */
 @media (max-width:900px){
  section{padding:64px 0}
@@ -219,8 +202,6 @@ footer{background:#fff;color:#6B7A8C;font-size:13px;line-height:20px;padding:32p
  .sum .bd{padding:22px;gap:24px}
  .sum .hd{padding:18px 22px}
  .final h2{font-size:30px;line-height:36px}
- .bf-big{font-size:84px;line-height:80px;letter-spacing:-3px}
- .bf-box{padding:44px 22px 28px}
  .pay{gap:12px}.pay .ti{font-size:18px}
  .step-sub{margin-left:0}
 }
