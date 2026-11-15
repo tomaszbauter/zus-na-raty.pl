@@ -1,0 +1,12 @@
+# Wdrożenie pośrednika /api/nip jako Cloudflare Worker (wymaga domeny zus-na-raty.pl w Cloudflare).
+name = "zus-na-raty-nip"
+main = "nip-proxy.js"
+compatibility_date = "2026-11-01"
+
+routes = [
+  { pattern = "zus-na-raty.pl/api/nip*", zone_name = "zus-na-raty.pl" }
+]
+
+# Opcjonalnie (silnik generatora), ustawiane poleceniami:
+#   npx wrangler secret put ENGINE_URL
+#   npx wrangler secret put ENGINE_KEY
