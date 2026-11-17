@@ -41,7 +41,7 @@
 
   /* 2b. Umami (własna instancja, bez cookies i bez localStorage, anonimowe, szanuje Do Not Track).
          Włączy się po wpisaniu UMAMI_HOST (adres po domenie w Cytrusie, bez ukośnika na końcu). */
-  var UMAMI_HOST = ''; /* TODO: np. 'https://umami.kancelariafenix.pl' */
+  var UMAMI_HOST = 'https://umami.heyoffice.si'; /* wymaga domeny w Cytrusie + DNS, inaczej skrypt cicho się nie załaduje */
   var UMAMI_ID = '51dbd152-8294-46f3-bef2-1a6ec11b5015';
   if (UMAMI_HOST) {
     var us = d.createElement('script');
