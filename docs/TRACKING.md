@@ -40,5 +40,5 @@ Bez tego Ads/Meta zobaczą tylko Lead, nie sprzedaż.
 ## Umami (własna instancja)
 - Serwer: Mikrus ruth119, `/opt/umami` (Umami + Postgres 16 w Dockerze, port 8091, 512 MB + 384 MB limitu pamięci). Strona „zus-na-raty" ma ID `51dbd152-8294-46f3-bef2-1a6ec11b5015`.
 - Hasło admina: tylko na serwerze (`/opt/umami/admin-password.txt`), nie w repo.
-- Publiczny HTTPS: do zrobienia domena w Cytrusie (cel `[IPv6]:8091`, wzorzec jak JARVIS), potem `UMAMI_HOST` jest już ustawiony na https://umami.heyoffice.si (DNS u Spaceship, domena do dodania w Cytrusie).
+- Publiczny HTTPS: do zrobienia domena w Cytrusie (cel `[IPv6]:8091`, wzorzec jak JARVIS), potem `UMAMI_HOST` jest już ustawiony na https://umami.heyoffice.si (CNAME umami -> backend.strony.me w Spaceship, Cytrus -> [IPv6]:8091, LIVE 17.11.2026; dzienny pg_dump /opt/umami/dumps, cron.d).
 - Mierzy bez cookies; zdarzenia jak w dataLayer (`nip_submit`, `cta_click`, `video_start`, `contact_email_click`).
