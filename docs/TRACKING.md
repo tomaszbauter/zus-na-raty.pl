@@ -47,6 +47,6 @@ Bez tego Ads/Meta zobaczą tylko Lead, nie sprzedaż.
 - Decyzja: reklamy z konta SiP (portfolio „Szałański i Partnerzy"), Google Ads na razie nie zakładamy.
 - Konto reklamowe: „zus-na-raty (SiP)", ID `1860283758731768` (PLN, Europe/Warsaw), brak metody płatności (do dodania przez Mateusza).
 - Zestaw danych / Pixel: „zus-na-raty.pl", ID `1801516394259543`, połączony tylko z tym kontem. Osobny od Pixela SiP `796199526884938` (szalanskikancelaria.pl, w `sz-consent`).
-- GTM (kontener GTM-5RW5FQSD): tagi `Meta Pixel - PageView` (All Pages) i `Meta Pixel - Lead (nip_submit)`, szablon Meta Pixel, wymagana zgoda `ad_storage` + `ad_user_data`, opt-in do „Meta-enabled CAPI" ODZNACZONY (CAPI robimy własne).
+- GTM (kontener GTM-5RW5FQSD): tagi `Meta Pixel - PageView` (All Pages) i `Meta Pixel - Lead (nip_submit)`, OPUBLIKOWANE w wersji 3 (17.11.2026), szablon Meta Pixel, wymagana zgoda `ad_storage` + `ad_user_data`, opt-in do „Meta-enabled CAPI" ODZNACZONY (CAPI robimy własne).
 - Uwaga: zakup i `Lead` z generatora lecą do Pixela SiP (raty-tracking.js używa `fbq` z sz-consent), nie do Pixela zus-na-raty. Do optymalizacji kampanii na sprzedaż: CAPI na Pixel `1801516394259543` albo dodać drugi `fbq('init')` w generatorze.
-- Do zrobienia: weryfikacja domeny `zus-na-raty.pl` w Meta (rekord DNS u Tomasza), metoda płatności, publikacja kontenera GTM, polityka reklam przed startem.
+- Do zrobienia: weryfikacja domeny `zus-na-raty.pl` w Meta (rekord DNS u Tomasza), metoda płatności, polityka reklam przed startem, test w podglądzie GTM po wgraniu landingu.
