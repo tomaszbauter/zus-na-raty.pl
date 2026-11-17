@@ -57,8 +57,17 @@
     w.dataLayer.push(o);
     try { if (w.umami && w.umami.track) w.umami.track(name, extra || {}); } catch (e) {}
   }
+  function validNip(n) {   /* ta sama suma kontrolna co w formularzu, żeby nie liczyć błędnych NIP-ów */
+    if (!/^\d{10}$/.test(n)) return false;
+    var k = [6, 5, 7, 2, 3, 4, 5, 6, 7], s = 0, i;
+    for (i = 0; i < 9; i++) s += k[i] * Number(n.charAt(i));
+    return (s % 11) === Number(n.charAt(9));
+  }
   d.addEventListener('submit', function (e) {
-    if (e.target && e.target.id === 'nip-form') ev('nip_submit');   /* przejście do generatora = lead */
+    if (e.target && e.target.id === 'nip-form') {   /* poprawny NIP = przejście do generatora = lead */
+      var f = d.getElementById('z-nip'), n = f ? String(f.value || '').replace(/^\s*PL/i, '').replace(/\D/g, '') : '';
+      if (validNip(n)) ev('nip_submit');
+    }
   }, true);
   d.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#pakiet"], a.cta, a.btn-main');
@@ -86,8 +95,10 @@
   d.addEventListener('submit', stitch, true);
 
   /* 4. Baner zgody */
+  var CSS = '#znr-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:760px;margin:0 auto;background:#fff;color:#1b2b3c;border:1px solid #d5dde6;border-radius:14px;box-shadow:0 10px 40px rgba(10,30,60,.22);padding:16px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px;line-height:1.45}#znr-consent p{margin:0;flex:1 1 320px}#znr-consent div{display:flex;gap:8px;flex-wrap:wrap}#znr-consent button{font:inherit;font-weight:700;padding:11px 16px;border-radius:10px;border:0;cursor:pointer;background:#1565C0;color:#fff;min-height:44px}#znr-consent button.alt{background:#eef2f6;color:#1b2b3c}';
   function banner() {
     if (read()) return;
+    if (!d.getElementById('znr-consent-css')) { var st = d.createElement('style'); st.id = 'znr-consent-css'; st.textContent = CSS; d.head.appendChild(st); }
     var b = d.createElement('div');
     b.id = 'znr-consent'; b.setAttribute('role', 'dialog'); b.setAttribute('aria-label', 'Zgoda na cookies');
     b.innerHTML =
@@ -101,6 +112,9 @@
       if (!a) return;
       var c = { analytics: a === 'all', ads: a === 'all', t: Date.now() };
       save(c); apply(c); b.remove();
+      /* Tagi zablokowane brakiem zgody nie odpalają się po fakcie, więc dajemy im wyzwalacz po kliknięciu
+         (tylko tutaj, nie przy odtwarzaniu zapisanej zgody, żeby nie dublować PageView). */
+      if (c.ads) w.dataLayer.push({ event: 'znr_ads_consent' });
     });
   }
   function footerLink() {

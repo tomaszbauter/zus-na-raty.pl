@@ -50,3 +50,12 @@ Bez tego Ads/Meta zobaczą tylko Lead, nie sprzedaż.
 - GTM (kontener GTM-5RW5FQSD): tagi `Meta Pixel - PageView` (All Pages) i `Meta Pixel - Lead (nip_submit)`, OPUBLIKOWANE w wersji 3 (17.11.2026), szablon Meta Pixel, wymagana zgoda `ad_storage` + `ad_user_data`, opt-in do „Meta-enabled CAPI" ODZNACZONY (CAPI robimy własne).
 - Uwaga: zakup i `Lead` z generatora lecą do Pixela SiP (raty-tracking.js używa `fbq` z sz-consent), nie do Pixela zus-na-raty. Do optymalizacji kampanii na sprzedaż: CAPI na Pixel `1801516394259543` albo dodać drugi `fbq('init')` w generatorze.
 - Do zrobienia: weryfikacja domeny `zus-na-raty.pl` w Meta (rekord DNS u Tomasza), metoda płatności, polityka reklam przed startem, test w podglądzie GTM po wgraniu landingu.
+
+## Wdrożenie na produkcję (17.11.2026)
+- Landing zus-na-raty.pl jest na Vercelu w zespole `phoenixmatsza's projects` (projekt `zus-na-raty`, `prj_9Yg03IxSeAfBpbv8afSf0vz55ymn`), deploy z plików (bez Git). Produkcyjny układ jest płaski (`index.html`, `style.css`, `tracking.js` w jednym katalogu), więc repo Tomasza (`css/`, `js/`) nie odpowiada produkcji 1:1.
+- Wdrożone: `tracking.js` + jedna linia `<script src="tracking.js">` w `<head>`; reszta plików bajt w bajt jak w poprzednim wdrożeniu (hashe SHA1 zgodne). Baner ma własne style w `tracking.js` (bez zmian w `style.css`).
+- Poprawki z testu na produkcji: (1) `nip_submit` tylko dla poprawnego NIP-u (walidacja sumy kontrolnej jak w formularzu), (2) zdarzenie `znr_ads_consent` po kliknięciu zgody, bo tagi zablokowane brakiem zgody nie odpalają się po fakcie.
+- GTM: wersja 4 opublikowana; `Meta Pixel - PageView` ma wyzwalacze All Pages LUB `CE - znr_ads_consent`.
+- Test (przeglądarka, produkcja): przed zgodą ładują się tylko GTM, Umami i anonimowy ping GA4; po zgodzie `fbevents.js` + `facebook.com/tr`. Nie testowane: `Lead` dla poprawnego NIP-u (nie wysyłano prawdziwego NIP-u, by nie zaśmiecać danych) i zdarzenie `purchase` w generatorze.
+- Uwaga: przeglądarki cache'ują kontener GTM do 15 min, więc po publikacji nowa wersja pojawia się z opóźnieniem.
+- Rollback: Vercel, poprzednie wdrożenia (`dpl_DtHfFMbTgEiC4MJPEAcJ25toNsS9` to oryginał bez trackingu).
