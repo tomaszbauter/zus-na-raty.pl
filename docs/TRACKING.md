@@ -40,5 +40,5 @@ Bez tego Ads/Meta zobaczą tylko Lead, nie sprzedaż.
 ## Umami (własna instancja)
 - Serwer: Mikrus ruth119, `/opt/umami` (Umami + Postgres 16 w Dockerze, port 8091, 512 MB + 384 MB limitu pamięci). Strona „zus-na-raty" ma ID `51dbd152-8294-46f3-bef2-1a6ec11b5015`.
 - Hasło admina: w Bitwarden Secrets (projekt obsidian-os, klucz `UMAMI_ADMIN_PASSWORD`, serwer EU), plik na serwerze usunięty; nie w repo.
-- Publiczny HTTPS: do zrobienia domena w Cytrusie (cel `[IPv6]:8091`, wzorzec jak JARVIS), potem `UMAMI_HOST` jest już ustawiony na https://umami.heyoffice.si (CNAME umami -> backend.strony.me w Spaceship, Cytrus -> [IPv6]:8091, LIVE 17.11.2026; backup: root crontab 3:17, pg_dump do /opt/umami/dumps, 7 kopii; poza maszyną NIE kopiowany, sprawdzić czy restic obejmuje /opt/umami).
+- Publiczny HTTPS: do zrobienia domena w Cytrusie (cel `[IPv6]:8091`, wzorzec jak JARVIS), potem `UMAMI_HOST` jest już ustawiony na https://umami.heyoffice.si (CNAME umami -> backend.strony.me w Spaceship, Cytrus -> [IPv6]:8091, LIVE 17.11.2026; backup: root crontab 3:17, pg_dump do /opt/umami/dumps, 7 kopii; restic -> B2 od 17.11.2026: /opt/umami w paths.txt, bez /opt/umami/db).
 - Mierzy bez cookies; zdarzenia jak w dataLayer (`nip_submit`, `cta_click`, `video_start`, `contact_email_click`).
