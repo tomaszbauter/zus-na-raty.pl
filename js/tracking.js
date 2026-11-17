@@ -39,10 +39,23 @@
     d.head.appendChild(s);
   }
 
-  /* 3. Zdarzenia (dataLayer) */
+  /* 2b. Umami (własna instancja, bez cookies i bez localStorage, anonimowe, szanuje Do Not Track).
+         Włączy się po wpisaniu UMAMI_HOST (adres po domenie w Cytrusie, bez ukośnika na końcu). */
+  var UMAMI_HOST = ''; /* TODO: np. 'https://umami.kancelariafenix.pl' */
+  var UMAMI_ID = '51dbd152-8294-46f3-bef2-1a6ec11b5015';
+  if (UMAMI_HOST) {
+    var us = d.createElement('script');
+    us.defer = true; us.src = UMAMI_HOST + '/script.js';
+    us.setAttribute('data-website-id', UMAMI_ID);
+    us.setAttribute('data-do-not-track', 'true');
+    d.head.appendChild(us);
+  }
+
+  /* 3. Zdarzenia (dataLayer + Umami) */
   function ev(name, extra) {
     var o = { event: name }; for (var k in extra) o[k] = extra[k];
     w.dataLayer.push(o);
+    try { if (w.umami && w.umami.track) w.umami.track(name, extra || {}); } catch (e) {}
   }
   d.addEventListener('submit', function (e) {
     if (e.target && e.target.id === 'nip-form') ev('nip_submit');   /* przejście do generatora = lead */

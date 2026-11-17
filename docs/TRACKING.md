@@ -36,3 +36,9 @@ Bez tego Ads/Meta zobaczą tylko Lead, nie sprzedaż.
 ## Do ustalenia
 - Polityka prywatności/cookies (brak linku na stronie; baner jej nie wskazuje).
 - ID: GTM, GA4, Google Ads (ID + etykieta konwersji), Meta Pixel (konta nowe, do założenia).
+
+## Umami (własna instancja)
+- Serwer: Mikrus ruth119, `/opt/umami` (Umami + Postgres 16 w Dockerze, port 8091, 512 MB + 384 MB limitu pamięci). Strona „zus-na-raty" ma ID `51dbd152-8294-46f3-bef2-1a6ec11b5015`.
+- Hasło admina: tylko na serwerze (`/opt/umami/admin-password.txt`), nie w repo.
+- Publiczny HTTPS: do zrobienia domena w Cytrusie (cel `[IPv6]:8091`, wzorzec jak JARVIS), potem wpisać `UMAMI_HOST` w `js/tracking.js`.
+- Mierzy bez cookies; zdarzenia jak w dataLayer (`nip_submit`, `cta_click`, `video_start`, `contact_email_click`).
