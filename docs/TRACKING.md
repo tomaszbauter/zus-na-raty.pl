@@ -42,3 +42,11 @@ Bez tego Ads/Meta zobaczą tylko Lead, nie sprzedaż.
 - Hasło admina: w Bitwarden Secrets (projekt obsidian-os, klucz `UMAMI_ADMIN_PASSWORD`, serwer EU), plik na serwerze usunięty; nie w repo.
 - Publiczny HTTPS: do zrobienia domena w Cytrusie (cel `[IPv6]:8091`, wzorzec jak JARVIS), potem `UMAMI_HOST` jest już ustawiony na https://umami.heyoffice.si (CNAME umami -> backend.strony.me w Spaceship, Cytrus -> [IPv6]:8091, LIVE 17.11.2026; backup: root crontab 3:17, pg_dump do /opt/umami/dumps, 7 kopii; restic -> B2 od 17.11.2026: /opt/umami w paths.txt, bez /opt/umami/db).
 - Mierzy bez cookies; zdarzenia jak w dataLayer (`nip_submit`, `cta_click`, `video_start`, `contact_email_click`).
+
+## Meta (konto SiP, 17.11.2026)
+- Decyzja: reklamy z konta SiP (portfolio „Szałański i Partnerzy"), Google Ads na razie nie zakładamy.
+- Konto reklamowe: „zus-na-raty (SiP)", ID `1860283758731768` (PLN, Europe/Warsaw), brak metody płatności (do dodania przez Mateusza).
+- Zestaw danych / Pixel: „zus-na-raty.pl", ID `1801516394259543`, połączony tylko z tym kontem. Osobny od Pixela SiP `796199526884938` (szalanskikancelaria.pl, w `sz-consent`).
+- GTM (kontener GTM-5RW5FQSD): tagi `Meta Pixel - PageView` (All Pages) i `Meta Pixel - Lead (nip_submit)`, szablon Meta Pixel, wymagana zgoda `ad_storage` + `ad_user_data`, opt-in do „Meta-enabled CAPI" ODZNACZONY (CAPI robimy własne).
+- Uwaga: zakup i `Lead` z generatora lecą do Pixela SiP (raty-tracking.js używa `fbq` z sz-consent), nie do Pixela zus-na-raty. Do optymalizacji kampanii na sprzedaż: CAPI na Pixel `1801516394259543` albo dodać drugi `fbq('init')` w generatorze.
+- Do zrobienia: weryfikacja domeny `zus-na-raty.pl` w Meta (rekord DNS u Tomasza), metoda płatności, publikacja kontenera GTM, polityka reklam przed startem.
