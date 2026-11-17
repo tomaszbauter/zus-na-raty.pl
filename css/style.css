@@ -159,3 +159,10 @@ footer{background:#fff;color:#6B7A8C;font-size:13px;line-height:20px;padding:32p
 @media (min-width:561px) and (max-width:900px){.pkg{flex:1 1 300px;padding:26px;display:flex;flex-direction:column;justify-content:flex-start}.pkg>*{width:100%}.pkg .top{min-height:78px;align-items:flex-start}.pkg .name{font-size:18px;line-height:24px}}
 @media (max-width:560px){.gain li{padding:18px 20px 20px}.gain{gap:12px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* Baner zgody na cookies (js/tracking.js) */
+#znr-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:760px;margin:0 auto;background:#fff;color:#1b2b3c;border:1px solid #d5dde6;border-radius:14px;box-shadow:0 10px 40px rgba(10,30,60,.22);padding:16px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px;line-height:1.45}
+#znr-consent p{margin:0;flex:1 1 320px}
+#znr-consent div{display:flex;gap:8px;flex-wrap:wrap}
+#znr-consent button{font:inherit;font-weight:700;padding:11px 16px;border-radius:10px;border:0;cursor:pointer;background:#1565C0;color:#fff;min-height:44px}
+#znr-consent button.alt{background:#eef2f6;color:#1b2b3c}
